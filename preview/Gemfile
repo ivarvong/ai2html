@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+ruby '2.2.1'
+
+gem 'nokogiri'
+gem 'aws-sdk'
+gem 'sinatra'
+gem 'json'
+gem 'mini_magick'
+gem 'dotenv'

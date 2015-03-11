@@ -1,0 +1,31 @@
+(function() {
+	var data = {
+		html: <%= @parser.artboard_html_only.to_json %>,
+		css: <%= @parser.css.to_json %>,
+	}
+
+	var insert_el = function(tag, type, id, contents) {
+		var el = document.createElement(tag);
+		el.type = type;
+		el.innerHTML = contents;
+		if (id !== null) {
+			el.id = id;
+		}
+		return document.getElementsByTagName('head')[0].appendChild(el);
+	}
+
+	var boot = function() {
+		var embed = document.getElementById("g-<%= @parser.project_slug %>");
+		embed.innerHTML = data.html;
+		insert_el('style', 'text/css', null, data.css);		
+	}
+
+	if (document.readyState === "complete") { 
+		boot(); 
+	} else {
+		window.addEventListener('load', function() {
+			boot();
+		});
+	}
+	
+}).call(this);
